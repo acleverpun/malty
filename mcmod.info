@@ -1,0 +1,12 @@
+[ {
+	"modid": "malty",
+	"name": "Malty",
+	"description": "Mod focused around multiblocks.",
+	"version": "0.0.0.0",
+	"mcversion": "1.15.2",
+	"logoFile": "assets/malty/textures/logo.png",
+	"url": "minecraftforge.net/",
+	"updateJSON": "minecraftforge.net/versions.json",
+	"authorList": [ "Ross Hadden" ],
+	"credits": "Mekanism and... Gregtech?"
+} ]
