@@ -1,4 +1,4 @@
-package family.hadden.malty.init;
+package family.hadden.malty.block;
 
 import family.hadden.malty.Main;
 import net.minecraft.block.Block;
@@ -14,24 +14,24 @@ import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(modid = Main.modId, bus = Bus.MOD)
 @ObjectHolder(Main.modId)
-public class BlockInit {
-	public static Block dort;
+public class MaltyChest {
+	public static Block maltyChest;
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-		dort = new Block(Block.Properties.create(Material.ROCK))
-			.setRegistryName("dort");
+		maltyChest = new Block(Block.Properties.create(Material.ROCK))
+			.setRegistryName("malty-chest");
 
 		event.getRegistry().registerAll(
-			dort
+			maltyChest
 		);
 	}
 
 	@SubscribeEvent
 	public static void registerBlockItems(final RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(
-			new BlockItem(dort, new Item.Properties().group(ItemGroup.MISC))
-				.setRegistryName(dort.getRegistryName())
+			new BlockItem(maltyChest, new Item.Properties().group(ItemGroup.MISC))
+				.setRegistryName(maltyChest.getRegistryName())
 		);
 	}
 }
