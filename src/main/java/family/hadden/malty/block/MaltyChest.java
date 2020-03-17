@@ -30,7 +30,7 @@ public class MaltyChest {
 	@SubscribeEvent
 	public static void registerBlockItems(final RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(
-			new BlockItem(maltyChest, new Item.Properties().group(ItemGroup.MISC))
+			new BlockItem(maltyChest, new Item.Properties().group(Main.tab))
 				.setRegistryName(maltyChest.getRegistryName())
 		);
 	}
