@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "malty:blocks/dort"
+		"all": "malty:block/dort"
 	}
 }
