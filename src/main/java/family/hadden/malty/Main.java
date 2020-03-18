@@ -3,6 +3,8 @@ package family.hadden.malty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import family.hadden.malty.init.Registrar;
+import family.hadden.malty.init.Tab;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.common.Mod;
 

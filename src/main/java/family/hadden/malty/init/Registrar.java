@@ -1,5 +1,6 @@
-package family.hadden.malty;
+package family.hadden.malty.init;
 
+import family.hadden.malty.Main;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;

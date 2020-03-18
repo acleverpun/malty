@@ -1,4 +1,4 @@
-package family.hadden.malty;
+package family.hadden.malty.init;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
