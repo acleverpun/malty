@@ -3,6 +3,7 @@ package family.hadden.malty.init;
 import family.hadden.malty.Main;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,11 +18,16 @@ public class Registrar {
 
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-		MaltyBlocks.register(event.getRegistry());
+		Blocks.register(event.getRegistry());
 	}
 
 	@SubscribeEvent
 	public static void registerBlockItems(final RegistryEvent.Register<Item> event) {
-		MaltyItems.register(event.getRegistry());
+		Items.register(event.getRegistry());
+	}
+
+	@SubscribeEvent
+	public static void registerTileEntityTypes(final RegistryEvent.Register<TileEntityType<?>> event) {
+		TileEntityTypes.register(event.getRegistry());
 	}
 }
