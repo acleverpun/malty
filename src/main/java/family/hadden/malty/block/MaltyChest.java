@@ -9,7 +9,6 @@ import net.minecraft.world.IBlockReader;
 public class MaltyChest extends Block {
 	public MaltyChest() {
 		super(Block.Properties.create(Material.ROCK));
-		setRegistryName("malty-chest");
 	}
 
 	// @Override

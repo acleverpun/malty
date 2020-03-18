@@ -1,15 +1,17 @@
 package family.hadden.malty.init;
 
 import family.hadden.malty.Main;
-import family.hadden.malty.block.MaltyChest;
+import family.hadden.malty.tileEntity.MaltyChestTileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@ObjectHolder(Main.modId)
-public class TileEntityTypes {
-	public static final MaltyChest maltyChest = new MaltyChest();
+public final class TileEntityTypes {
+	public static final DeferredRegister<TileEntityType<?>> registry = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Main.modId);
 
-	public static void register(IForgeRegistry<TileEntityType<?>> registry) {
-	}
+	public static final RegistryObject<TileEntityType<MaltyChestTileEntity>> maltyChest = registry.register(
+		"malty-chest",
+		() -> TileEntityType.Builder.create(MaltyChestTileEntity::new, Blocks.maltyChest.get()).build(null)
+	);
 }

@@ -3,17 +3,15 @@ package family.hadden.malty.init;
 import family.hadden.malty.Main;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@ObjectHolder(Main.modId)
-public class Items {
-	// public static final MaltyChest maltyChest = null;
+public final class Items {
+	public static final DeferredRegister<Item> registry = new DeferredRegister<>(ForgeRegistries.ITEMS, Main.modId);
 
-	public static void register(IForgeRegistry<Item> registry) {
-		registry.registerAll(
-			new BlockItem(Blocks.maltyChest, new Item.Properties().group(Main.tab))
-				.setRegistryName(Blocks.maltyChest.getRegistryName())
-		);
-	}
+	public static final RegistryObject<Item> maltyChest = registry.register(
+		"malty-chest",
+		() -> new BlockItem(Blocks.maltyChest.get(), new Item.Properties().group(Main.tab))
+	);
 }
