@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -16,9 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class MaltyChest extends Block {
 	public MaltyChest() {
@@ -38,18 +37,13 @@ public class MaltyChest extends Block {
 
 	@Override
 	public ActionResultType onBlockActivated(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockRayTraceResult hit) {
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(world, pos));
-		return ActionResultType.SUCCESS;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	private void openGui(final World world, final BlockPos pos) {
-		if (world.isRemote) {
+		Main.log.debug(world.isRemote);
+		if (!world.isRemote) {
 			final TileEntity tileEntity = world.getTileEntity(pos);
-			Main.log.debug("Wait for it...");
 			if (tileEntity instanceof MaltyChestTileEntity) {
-				Main.log.debug("Yeppers");
+				NetworkHooks.openGui((ServerPlayerEntity) player, (MaltyChestTileEntity) tileEntity, pos);
 			}
 		}
+		return ActionResultType.SUCCESS;
 	}
 }

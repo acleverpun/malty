@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import family.hadden.malty.init.Blocks;
+import family.hadden.malty.init.Containers;
 import family.hadden.malty.init.Items;
 import family.hadden.malty.init.TileEntityTypes;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,6 +22,7 @@ public class Main {
 
 		Blocks.registry.register(eventBus);
 		Items.registry.register(eventBus);
+		Containers.registry.register(eventBus);
 		TileEntityTypes.registry.register(eventBus);
 	}
 }
