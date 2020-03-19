@@ -24,7 +24,7 @@ public final class Items {
 			.map(RegistryObject::get)
 			.forEach(block -> {
 				Main.log.debug("onRegisterItems " + block.getRegistryName());
-				final Item.Properties properties = new Item.Properties().group(Main.tab);
+				final Item.Properties properties = new Item.Properties().group(Tabs.malty);
 				final BlockItem blockItem = new BlockItem(block, properties);
 				blockItem.setRegistryName(block.getRegistryName());
 				registry.register(blockItem);
