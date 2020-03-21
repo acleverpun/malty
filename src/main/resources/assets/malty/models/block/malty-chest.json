@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-		"all": "malty:block/malty-chest"
+		"all": "malty:block/yellow"
 	}
 }
