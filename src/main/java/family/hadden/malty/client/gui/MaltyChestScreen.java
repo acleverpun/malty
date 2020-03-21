@@ -35,7 +35,8 @@ public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
 	protected void drawSlot(int x, int y) {
 		x = this.guiLeft + x;
 		y = this.guiTop + y;
-		AbstractGui.fill(x - 1, y + 17, x + 17, y - 1, 0xff999999);
+		AbstractGui.fill(x - 1, y + 17, x + 17, y - 1, 0x99ffffff);
+		AbstractGui.fill(x - 1, y + 16, x + 16, y - 1, 0xff333333);
 		AbstractGui.fill(x, y + 16, x + 16, y, 0xff8c8c8c);
 	}
 }
