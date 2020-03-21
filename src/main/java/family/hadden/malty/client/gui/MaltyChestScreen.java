@@ -29,12 +29,13 @@ public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		AbstractGui.fill(this.guiLeft, this.guiTop + this.ySize, this.guiLeft + this.xSize, this.guiTop, 0xffc7c8c8);
-		container.inventorySlots.forEach(slot -> drawSlot(slot.xPos, slot.yPos, 0xff8c8c8c));
+		container.inventorySlots.forEach(slot -> drawSlot(slot.xPos, slot.yPos));
 	}
 
-	protected void drawSlot(int x, int y, int color) {
+	protected void drawSlot(int x, int y) {
 		x = this.guiLeft + x;
 		y = this.guiTop + y;
-		AbstractGui.fill(x, y + 16, x + 16, y, color);
+		AbstractGui.fill(x - 1, y + 17, x + 17, y - 1, 0xff999999);
+		AbstractGui.fill(x, y + 16, x + 16, y, 0xff8c8c8c);
 	}
 }
