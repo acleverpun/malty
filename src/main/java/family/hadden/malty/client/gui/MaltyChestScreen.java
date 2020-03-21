@@ -28,7 +28,8 @@ public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
-		container.inventorySlots.forEach(slot -> drawSlot(slot.xPos, slot.yPos, 0x33999999));
+		AbstractGui.fill(this.guiLeft, this.guiTop + this.ySize, this.guiLeft + this.xSize, this.guiTop, 0xffc7c8c8);
+		container.inventorySlots.forEach(slot -> drawSlot(slot.xPos, slot.yPos, 0xff8c8c8c));
 	}
 
 	protected void drawSlot(int x, int y, int color) {
