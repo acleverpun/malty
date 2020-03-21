@@ -1,18 +1,12 @@
 package family.hadden.malty.client.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
-import family.hadden.malty.Main;
 import family.hadden.malty.container.MaltyChestContainer;
-import family.hadden.malty.tileEntity.MaltyChestTileEntity;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
-	private static final ResourceLocation backgroundTexture = new ResourceLocation(Main.modId, "textures/gui/container/malty-chest.png");
-
 	public MaltyChestScreen(final MaltyChestContainer container, final PlayerInventory inventory, final ITextComponent title) {
 		super(container, inventory, title);
 	}
@@ -34,21 +28,12 @@ public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
-		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		getMinecraft().getTextureManager().bindTexture(backgroundTexture);
-		int startX = this.guiLeft;
-		int startY = this.guiTop;
+		container.inventorySlots.forEach(slot -> drawSlot(slot.xPos, slot.yPos, 0x33999999));
+	}
 
-		this.blit(startX, startY, 0, 0, this.xSize, this.ySize);
-
-		final MaltyChestTileEntity tileEntity = container.tileEntity;
-
-		if (!tileEntity.inventory.getStackInSlot(MaltyChestTileEntity.FUEL_SLOT).isEmpty()) {
-			this.blit(
-				startX + 81, startY + 58,
-				176, 0,
-				14, 14
-			);
-		}
+	protected void drawSlot(int x, int y, int color) {
+		x = this.guiLeft + x;
+		y = this.guiTop + y;
+		AbstractGui.fill(x, y + 16, x + 16, y, color);
 	}
 }

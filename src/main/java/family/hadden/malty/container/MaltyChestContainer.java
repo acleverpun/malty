@@ -33,7 +33,7 @@ public class MaltyChestContainer extends Container {
 		// Add all the slots for the tileEntity's inventory and the playerInventory to this container
 
 		// Tile inventory slot(s)
-		this.addSlot(new SlotItemHandler(tileEntity.inventory, MaltyChestTileEntity.FUEL_SLOT, 80, 35));
+		this.addSlot(new SlotItemHandler(tileEntity.inventory, MaltyChestTileEntity.FUEL_SLOT, 80, 32));
 
 		final int playerInventoryStartX = 8;
 		final int playerInventoryStartY = 84;
