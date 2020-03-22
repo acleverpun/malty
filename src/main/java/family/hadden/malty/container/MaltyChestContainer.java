@@ -9,6 +9,7 @@ import family.hadden.malty.init.Containers;
 import family.hadden.malty.tileEntity.MaltyChestTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -30,26 +31,36 @@ public class MaltyChestContainer extends Container {
 		this.tileEntity = tileEntity;
 		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
-		// Add all the slots for the tileEntity's inventory and the playerInventory to this container
+		this.addOwnSlots();
+		this.addPlayerSlots(playerInventory);
+	}
 
-		// Tile inventory slot(s)
-		this.addSlot(new SlotItemHandler(tileEntity.inventory, MaltyChestTileEntity.FUEL_SLOT, 80, 32));
-
-		final int playerInventoryStartX = 8;
-		final int playerInventoryStartY = 84;
-		final int slotSizePlus2 = 18; // slots are 16x16, plus 2 (for spacing/borders) is 18x18
-
-		// Player Top Inventory slots
+	private void addOwnSlots() {
+		int slotIndex = 0;
 		for (int row = 0; row < 3; ++row) {
-			for (int column = 0; column < 9; ++column) {
-				this.addSlot(new Slot(playerInventory, 9 + (row * 9) + column, playerInventoryStartX + (column * slotSizePlus2), playerInventoryStartY + (row * slotSizePlus2)));
+			for (int col = 0; col < 9; ++col) {
+				int x = 8 + col * 18;
+				int y = 16 + row * 18;
+				this.addSlot(new SlotItemHandler(tileEntity.inventory, slotIndex++, x, y));
+			}
+		}
+	}
+
+	private void addPlayerSlots(IInventory playerInventory) {
+		// Slots for the main inventory
+		for (int row = 0; row < 3; ++row) {
+			for (int col = 0; col < 9; ++col) {
+				int x = 8 + col * 18;
+				int y = 84 + row * 18;
+				this.addSlot(new Slot(playerInventory, col + row * 9 + 9, x, y));
 			}
 		}
 
-		final int playerHotbarY = playerInventoryStartY + slotSizePlus2 * 3 + 4;
-		// Player Hotbar slots
-		for (int column = 0; column < 9; ++column) {
-			this.addSlot(new Slot(playerInventory, column, playerInventoryStartX + (column * slotSizePlus2), playerHotbarY));
+		// Slots for the hotbar
+		for (int row = 0; row < 9; ++row) {
+			int x = 8 + row * 18;
+			int y = 72 + 70;
+			this.addSlot(new Slot(playerInventory, row, x, y));
 		}
 	}
 
