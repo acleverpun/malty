@@ -30,9 +30,8 @@ public class AccepterTileEntity extends TileEntity {
 			tiles.remove(side);
 
 			// Remove other instances of this same class
-			AccepterTileEntity self = this;
 			Map.Entry<Direction, TileEntity> entry = tiles.entrySet().stream()
-				.filter((ent) -> ent.getValue().getClass() != self.getClass())
+				.filter((ent) -> ent.getValue().getClass() != this.getClass())
 				.findFirst()
 				.orElse(null)
 			;

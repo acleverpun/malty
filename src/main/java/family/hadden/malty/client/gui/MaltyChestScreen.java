@@ -4,6 +4,7 @@ import family.hadden.malty.container.MaltyChestContainer;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.text.ITextComponent;
 
 public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
@@ -29,12 +30,12 @@ public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		AbstractGui.fill(this.guiLeft, this.guiTop + this.ySize, this.guiLeft + this.xSize, this.guiTop, 0xffc7c8c8);
-		container.inventorySlots.forEach((slot) -> drawSlot(slot.xPos, slot.yPos));
+		container.inventorySlots.forEach(this::drawSlot);
 	}
 
-	protected void drawSlot(int x, int y) {
-		x = this.guiLeft + x;
-		y = this.guiTop + y;
+	protected void drawSlot(Slot slot) {
+		int x = this.guiLeft + slot.xPos;
+		int y = this.guiTop + slot.yPos;
 		AbstractGui.fill(x - 1, y + 17, x + 17, y - 1, 0x99ffffff);
 		AbstractGui.fill(x - 1, y + 16, x + 16, y - 1, 0xff333333);
 		AbstractGui.fill(x, y + 16, x + 16, y, 0xff8c8c8c);

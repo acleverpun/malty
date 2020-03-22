@@ -12,8 +12,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public final class Blocks {
 	public static final DeferredRegister<Block> registry = new DeferredRegister<>(ForgeRegistries.BLOCKS, Main.modId);
 
-	public static final RegistryObject<Block> maltyChest = registry.register("malty-chest", () -> new MaltyChest());
+	public static final RegistryObject<Block> maltyChest = registry.register("malty-chest", MaltyChest::new);
 
-	public static final RegistryObject<Block> accepter = registry.register("accepter", () -> new Accepter());
-	public static final RegistryObject<Block> aggregator = registry.register("aggregator", () -> new Aggregator());
+	public static final RegistryObject<Block> accepter = registry.register("accepter", Accepter::new);
+	public static final RegistryObject<Block> aggregator = registry.register("aggregator", Aggregator::new);
 }
