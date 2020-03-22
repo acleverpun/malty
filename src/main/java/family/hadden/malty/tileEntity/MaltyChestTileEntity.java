@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
@@ -19,6 +20,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class MaltyChestTileEntity extends TileEntity implements INamedContainerProvider {
+	private static final String inventoryTag = "inventory";
+
 	public final ItemStackHandler inventory = new ItemStackHandler(9 * 3) {
 		@Override
 		protected void onContentsChanged(final int slot) {
@@ -47,5 +50,18 @@ public class MaltyChestTileEntity extends TileEntity implements INamedContainerP
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return inventoryCap.cast();
 		return super.getCapability(cap, side);
+	}
+
+	@Override
+	public void read(CompoundNBT compound) {
+		super.read(compound);
+		this.inventory.deserializeNBT(compound.getCompound(inventoryTag));
+	}
+
+	@Override
+	public CompoundNBT write(CompoundNBT compound) {
+		super.write(compound);
+		compound.put(inventoryTag, this.inventory.serializeNBT());
+		return compound;
 	}
 }
