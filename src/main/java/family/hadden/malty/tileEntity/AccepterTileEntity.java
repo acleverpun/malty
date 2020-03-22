@@ -19,11 +19,17 @@ public class AccepterTileEntity extends TileEntity {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			IBlockReader world = getWorld();
 
+			// Proxy items into adjacent inventories other than the origin and other accepters
+			// Order will be the order of the Direction enum values
+			// TODO: make order configurable, or at least a sane default
 			for (Direction dir : Direction.values()) {
+				if (dir == side) continue;
+
 				BlockPos blockPos = pos.add(dir.getXOffset(), dir.getYOffset(), dir.getZOffset());
 				TileEntity tileEntity = world.getTileEntity(blockPos);
-				if (tileEntity instanceof MaltyChestTileEntity) {
-					return tileEntity.getCapability(cap);
+
+				if (tileEntity != null && tileEntity.getClass() != this.getClass()) {
+					return tileEntity.getCapability(cap, side.getOpposite());
 				}
 			}
 		}
