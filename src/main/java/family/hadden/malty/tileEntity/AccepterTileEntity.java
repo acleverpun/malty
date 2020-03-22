@@ -1,9 +1,12 @@
 package family.hadden.malty.tileEntity;
 
+import java.util.Map;
+
+import family.hadden.malty.Main;
 import family.hadden.malty.init.TileEntityTypes;
+import family.hadden.malty.util.WorldUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -16,21 +19,26 @@ public class AccepterTileEntity extends TileEntity {
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+		// Proxy items into adjacent inventories
+		// Order will be the order of the Direction enum values
+		// TODO: make order configurable, or at least a sane default
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			IBlockReader world = getWorld();
+			Map<Direction, TileEntity> tiles = WorldUtils.getAdjacentTiles(world, pos);
 
-			// Proxy items into adjacent inventories other than the origin and other accepters
-			// Order will be the order of the Direction enum values
-			// TODO: make order configurable, or at least a sane default
-			for (Direction dir : Direction.values()) {
-				if (dir == side) continue;
+			// Remove item source
+			tiles.remove(side);
 
-				BlockPos blockPos = pos.add(dir.getXOffset(), dir.getYOffset(), dir.getZOffset());
-				TileEntity tileEntity = world.getTileEntity(blockPos);
+			// Remove other instances of this same class
+			AccepterTileEntity self = this;
+			Map.Entry<Direction, TileEntity> entry = tiles.entrySet().stream()
+				.filter((ent) -> ent.getValue().getClass() != self.getClass())
+				.findFirst()
+				.orElse(null)
+			;
 
-				if (tileEntity != null && tileEntity.getClass() != this.getClass()) {
-					return tileEntity.getCapability(cap, side.getOpposite());
-				}
+			if (entry != null) {
+				return entry.getValue().getCapability(cap, entry.getKey().getOpposite());
 			}
 		}
 		return super.getCapability(cap, side);
