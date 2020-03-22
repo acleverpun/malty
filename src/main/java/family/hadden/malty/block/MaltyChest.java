@@ -2,7 +2,6 @@ package family.hadden.malty.block;
 
 import javax.annotation.Nullable;
 
-import family.hadden.malty.Main;
 import family.hadden.malty.init.TileEntityTypes;
 import family.hadden.malty.tileEntity.MaltyChestTileEntity;
 import net.minecraft.block.Block;
@@ -21,7 +20,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class MaltyChest extends Block {
 	public MaltyChest() {
-		super(Block.Properties.create(Material.ROCK));
+		super(Block.Properties.create(Material.WOOD));
 	}
 
 	@Override
@@ -37,7 +36,6 @@ public class MaltyChest extends Block {
 
 	@Override
 	public ActionResultType onBlockActivated(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockRayTraceResult hit) {
-		Main.log.debug(world.isRemote);
 		if (!world.isRemote) {
 			final TileEntity tileEntity = world.getTileEntity(pos);
 			if (tileEntity instanceof MaltyChestTileEntity) {
