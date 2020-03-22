@@ -1,6 +1,7 @@
 package family.hadden.malty.init;
 
 import family.hadden.malty.Main;
+import family.hadden.malty.block.Accepter;
 import family.hadden.malty.block.Aggregator;
 import family.hadden.malty.block.MaltyChest;
 import net.minecraft.block.Block;
@@ -13,5 +14,6 @@ public final class Blocks {
 
 	public static final RegistryObject<Block> maltyChest = registry.register("malty-chest", () -> new MaltyChest());
 
+	public static final RegistryObject<Block> accepter = registry.register("accepter", () -> new Accepter());
 	public static final RegistryObject<Block> aggregator = registry.register("aggregator", () -> new Aggregator());
 }

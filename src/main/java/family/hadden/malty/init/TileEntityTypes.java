@@ -1,6 +1,7 @@
 package family.hadden.malty.init;
 
 import family.hadden.malty.Main;
+import family.hadden.malty.tileEntity.AccepterTileEntity;
 import family.hadden.malty.tileEntity.AggregatorTileEntity;
 import family.hadden.malty.tileEntity.MaltyChestTileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -14,6 +15,11 @@ public final class TileEntityTypes {
 	public static final RegistryObject<TileEntityType<MaltyChestTileEntity>> maltyChest = registry.register(
 		"malty-chest",
 		() -> TileEntityType.Builder.create(MaltyChestTileEntity::new, Blocks.maltyChest.get()).build(null)
+	);
+
+	public static final RegistryObject<TileEntityType<AccepterTileEntity>> accepter = registry.register(
+		"accepter",
+		() -> TileEntityType.Builder.create(AccepterTileEntity::new, Blocks.accepter.get()).build(null)
 	);
 
 	public static final RegistryObject<TileEntityType<AggregatorTileEntity>> aggregator = registry.register(
