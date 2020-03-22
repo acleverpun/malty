@@ -22,7 +22,7 @@ public final class Items {
 		// Automatically register BlockItems for all Blocks
 		Blocks.registry.getEntries().stream()
 			.map(RegistryObject::get)
-			.forEach(block -> {
+			.forEach((block) -> {
 				Main.log.debug("onRegisterItems " + block.getRegistryName());
 				final Item.Properties properties = new Item.Properties().group(Tabs.malty);
 				final BlockItem blockItem = new BlockItem(block, properties);

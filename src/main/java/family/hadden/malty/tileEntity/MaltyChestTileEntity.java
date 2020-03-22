@@ -26,7 +26,7 @@ public class MaltyChestTileEntity extends TileEntity implements INamedContainerP
 		@Override
 		protected void onContentsChanged(final int slot) {
 			super.onContentsChanged(slot);
-			MaltyChestTileEntity.this.markDirty();
+			markDirty();
 		}
 	};
 
