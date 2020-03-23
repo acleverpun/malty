@@ -29,10 +29,10 @@ public class MaltyChestContainer extends Container {
 	public MaltyChestContainer(final int windowId, final PlayerInventory playerInventory, final MaltyChestTileEntity tileEntity) {
 		super(Containers.maltyChest.get(), windowId);
 		this.tileEntity = tileEntity;
-		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+		canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
-		this.addOwnSlots();
-		this.addPlayerSlots(playerInventory);
+		addOwnSlots();
+		addPlayerSlots(playerInventory);
 	}
 
 	private void addOwnSlots() {
@@ -41,7 +41,7 @@ public class MaltyChestContainer extends Container {
 			for (int col = 0; col < 9; ++col) {
 				int x = 8 + col * 18;
 				int y = 16 + row * 18;
-				this.addSlot(new SlotItemHandler(tileEntity.inventory, slotIndex++, x, y));
+				addSlot(new SlotItemHandler(tileEntity.inventory, slotIndex++, x, y));
 			}
 		}
 	}
@@ -52,7 +52,7 @@ public class MaltyChestContainer extends Container {
 			for (int col = 0; col < 9; ++col) {
 				int x = 8 + col * 18;
 				int y = 84 + row * 18;
-				this.addSlot(new Slot(playerInventory, col + row * 9 + 9, x, y));
+				addSlot(new Slot(playerInventory, col + row * 9 + 9, x, y));
 			}
 		}
 
@@ -60,7 +60,7 @@ public class MaltyChestContainer extends Container {
 		for (int row = 0; row < 9; ++row) {
 			int x = 8 + row * 18;
 			int y = 72 + 70;
-			this.addSlot(new Slot(playerInventory, row, x, y));
+			addSlot(new Slot(playerInventory, row, x, y));
 		}
 	}
 
@@ -77,14 +77,14 @@ public class MaltyChestContainer extends Container {
 	@Override
 	public ItemStack transferStackInSlot(final PlayerEntity player, final int index) {
 		ItemStack returnStack = ItemStack.EMPTY;
-		final Slot slot = this.inventorySlots.get(index);
+		final Slot slot = inventorySlots.get(index);
 		if (slot != null && slot.getHasStack()) {
 			final ItemStack slotStack = slot.getStack();
 			returnStack = slotStack.copy();
 
-			final int containerSlots = this.inventorySlots.size() - player.inventory.mainInventory.size();
+			final int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size();
 			if (index < containerSlots) {
-				if (!mergeItemStack(slotStack, containerSlots, this.inventorySlots.size(), true)) {
+				if (!mergeItemStack(slotStack, containerSlots, inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (!mergeItemStack(slotStack, 0, containerSlots, false)) {

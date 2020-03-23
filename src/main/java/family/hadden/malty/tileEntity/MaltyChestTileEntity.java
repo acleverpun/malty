@@ -30,7 +30,7 @@ public class MaltyChestTileEntity extends TileEntity implements INamedContainerP
 		}
 	};
 
-	private final LazyOptional<ItemStackHandler> inventoryCap = LazyOptional.of(() -> this.inventory);
+	private final LazyOptional<ItemStackHandler> inventoryCap = LazyOptional.of(() -> inventory);
 
 	public MaltyChestTileEntity() {
 		super(TileEntityTypes.maltyChest.get());
@@ -55,13 +55,13 @@ public class MaltyChestTileEntity extends TileEntity implements INamedContainerP
 	@Override
 	public void read(CompoundNBT compound) {
 		super.read(compound);
-		this.inventory.deserializeNBT(compound.getCompound(inventoryTag));
+		inventory.deserializeNBT(compound.getCompound(inventoryTag));
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT compound) {
 		super.write(compound);
-		compound.put(inventoryTag, this.inventory.serializeNBT());
+		compound.put(inventoryTag, inventory.serializeNBT());
 		return compound;
 	}
 }

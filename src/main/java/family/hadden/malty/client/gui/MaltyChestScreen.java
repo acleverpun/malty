@@ -14,28 +14,28 @@ public class MaltyChestScreen extends ContainerScreen<MaltyChestContainer> {
 
 	@Override
 	public void render(final int mouseX, final int mouseY, final float partialTicks) {
-		this.renderBackground();
+		renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
-		this.renderHoveredToolTip(mouseX, mouseY);
+		renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		String s = this.title.getFormattedText();
-		this.font.drawString(s, (float) (this.xSize / 2 - this.font.getStringWidth(s) / 2), 6.0F, 0x404040);
-		this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.ySize - 96 + 2), 0x404040);
+		String s = title.getFormattedText();
+		font.drawString(s, (float) (xSize / 2 - font.getStringWidth(s) / 2), 6.0F, 0x404040);
+		font.drawString(playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (ySize - 96 + 2), 0x404040);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
-		AbstractGui.fill(this.guiLeft, this.guiTop + this.ySize, this.guiLeft + this.xSize, this.guiTop, 0xffc7c8c8);
+		AbstractGui.fill(guiLeft, guiTop + ySize, guiLeft + xSize, guiTop, 0xffc7c8c8);
 		container.inventorySlots.forEach(this::drawSlot);
 	}
 
 	protected void drawSlot(Slot slot) {
-		int x = this.guiLeft + slot.xPos;
-		int y = this.guiTop + slot.yPos;
+		int x = guiLeft + slot.xPos;
+		int y = guiTop + slot.yPos;
 		AbstractGui.fill(x - 1, y + 17, x + 17, y - 1, 0x99ffffff);
 		AbstractGui.fill(x - 1, y + 16, x + 16, y - 1, 0xff333333);
 		AbstractGui.fill(x, y + 16, x + 16, y, 0xff8c8c8c);
