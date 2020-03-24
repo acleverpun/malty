@@ -2,7 +2,6 @@ package family.hadden.malty.tileEntity;
 
 import java.util.Map;
 
-import family.hadden.malty.Main;
 import family.hadden.malty.init.TileEntityTypes;
 import family.hadden.malty.util.WorldUtils;
 import net.minecraft.tileentity.TileEntity;
