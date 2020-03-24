@@ -1,6 +1,7 @@
 package family.hadden.malty.client;
 
 import family.hadden.malty.Main;
+import family.hadden.malty.client.gui.AggregatorScreen;
 import family.hadden.malty.client.gui.MaltyChestScreen;
 import family.hadden.malty.init.Containers;
 import net.minecraft.client.gui.ScreenManager;
@@ -22,6 +23,7 @@ public final class ClientEvents {
 		// Register ContainerType Screens
 		// ScreenManager.registerFactory is not safe to call during parallel mod loading so we queue it to run later
 		DeferredWorkQueue.runLater(() -> {
+			ScreenManager.registerFactory(Containers.aggregator.get(), AggregatorScreen::new);
 			ScreenManager.registerFactory(Containers.maltyChest.get(), MaltyChestScreen::new);
 		});
 	}

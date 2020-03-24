@@ -3,12 +3,12 @@ package family.hadden.malty.block;
 import javax.annotation.Nullable;
 
 import family.hadden.malty.init.TileEntityTypes;
-import family.hadden.malty.tileEntity.MaltyChestTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -38,9 +38,7 @@ public class MaltyChest extends Block {
 	public ActionResultType onBlockActivated(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockRayTraceResult hit) {
 		if (!world.isRemote) {
 			final TileEntity tileEntity = world.getTileEntity(pos);
-			if (tileEntity instanceof MaltyChestTileEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (MaltyChestTileEntity) tileEntity, pos);
-			}
+			NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, pos);
 		}
 		return ActionResultType.SUCCESS;
 	}

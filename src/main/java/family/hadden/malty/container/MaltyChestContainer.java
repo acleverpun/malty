@@ -68,8 +68,7 @@ public class MaltyChestContainer extends Container {
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
 		Objects.requireNonNull(data, "data cannot be null!");
 		final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-		if (tileAtPos instanceof MaltyChestTileEntity)
-			return (MaltyChestTileEntity) tileAtPos;
+		if (tileAtPos instanceof MaltyChestTileEntity) return (MaltyChestTileEntity) tileAtPos;
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
 	}
 
