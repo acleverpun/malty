@@ -12,9 +12,9 @@
       "args": "",
       "env": {
         "MOD_CLASSES": "malty%%${workspaceFolder}/bin/main:malty%%${workspaceFolder}/bin/main",
-        "MCP_MAPPINGS": "snapshot_20200324-1.15.1",
+        "MCP_MAPPINGS": "snapshot_20200325-1.15.1",
         "MCP_VERSION": "20200307.202953",
-        "FORGE_VERSION": "31.1.24",
+        "FORGE_VERSION": "31.1.27",
         "assetIndex": "1.15",
         "assetDirectory": "/home/ross/.gradle/caches/forge_gradle/assets",
         "nativesDirectory": "${workspaceFolder}/build/natives",
@@ -34,9 +34,9 @@
       "args": "--mod malty --all --output /home/ross/dev/games/mods/malty/src/generated/resources",
       "env": {
         "MOD_CLASSES": "malty%%${workspaceFolder}/bin/main:malty%%${workspaceFolder}/bin/main",
-        "MCP_MAPPINGS": "snapshot_20200324-1.15.1",
+        "MCP_MAPPINGS": "snapshot_20200325-1.15.1",
         "MCP_VERSION": "20200307.202953",
-        "FORGE_VERSION": "31.1.24",
+        "FORGE_VERSION": "31.1.27",
         "FORGE_GROUP": "net.minecraftforge",
         "target": "fmluserdevdata",
         "MC_VERSION": "1.15.2"
@@ -53,9 +53,9 @@
       "args": "",
       "env": {
         "MOD_CLASSES": "malty%%${workspaceFolder}/bin/main:malty%%${workspaceFolder}/bin/main",
-        "MCP_MAPPINGS": "snapshot_20200324-1.15.1",
+        "MCP_MAPPINGS": "snapshot_20200325-1.15.1",
         "MCP_VERSION": "20200307.202953",
-        "FORGE_VERSION": "31.1.24",
+        "FORGE_VERSION": "31.1.27",
         "FORGE_GROUP": "net.minecraftforge",
         "target": "fmluserdevserver",
         "MC_VERSION": "1.15.2"
