@@ -1,0 +1,7 @@
+window {
+	size(256, 256)
+
+	panel('', 'vertical') {
+		bgthickness(2)
+	}
+}

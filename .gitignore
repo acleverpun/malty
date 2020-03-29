@@ -3,11 +3,12 @@
 build
 
 # misc
-.classpath
-.project
-.settings
-bin
-run
+/.classpath
+/.project
+/.settings
+/bin
+/lib
+/run
 
 # editor
 tags
