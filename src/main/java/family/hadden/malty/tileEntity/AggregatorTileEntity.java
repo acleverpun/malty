@@ -3,7 +3,6 @@ package family.hadden.malty.tileEntity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import family.hadden.malty.Main;
 import family.hadden.malty.container.AggregatorContainer;
 import family.hadden.malty.init.Containers;
 import family.hadden.malty.init.TileEntityTypes;
@@ -11,7 +10,6 @@ import mcjty.lib.api.container.CapabilityContainerProvider;
 import mcjty.lib.api.container.DefaultContainerProvider;
 import mcjty.lib.container.ContainerFactory;
 import mcjty.lib.container.GenericContainer;
-import mcjty.lib.container.SlotDefinition;
 import mcjty.lib.tileentity.GenericTileEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.util.Direction;
@@ -22,8 +20,6 @@ public class AggregatorTileEntity extends GenericTileEntity {
 	public static final ContainerFactory containerFactory = new ContainerFactory(0) {
 		@Override
 		protected void setup() {
-			Main.log.debug("container factory setup");
-			// slot(SlotDefinition.container(), "aggregator", 0, 0, 0);
 			playerSlots(7, 128);
 		}
 	};

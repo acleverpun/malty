@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import family.hadden.malty.tileEntity.MaltyChestTileEntity;
 import family.hadden.malty.util.WorldUtils;
 import mcjty.lib.container.ContainerFactory;
 import mcjty.lib.container.GenericContainer;
@@ -15,6 +14,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -31,20 +31,18 @@ public class AggregatorContainer extends GenericContainer {
 
 		tiles.entrySet().stream()
 			.filter((it) -> it.getValue().getCapability(cap, it.getKey().getOpposite()) != null)
-			.filter((it) -> it.getValue() instanceof MaltyChestTileEntity)
-			.forEach((it) -> addSlots((MaltyChestTileEntity) it.getValue()));
+			.forEach((it) -> {
+				int slotIndex = 0;
+				for (int row = 0; row < 3; ++row) {
+					for (int col = 0; col < 9; ++col) {
+						int x = 8 + col * 18;
+						int y = 16 + row * 18 + offset;
+						LazyOptional<IItemHandler> items = it.getValue().getCapability(cap, it.getKey().getOpposite());
+						addSlot(new SlotItemHandler(items.orElse(null), slotIndex++, x, y));
+					}
+				}
+				offset += 64;
+			});
 		;
-	}
-
-	private void addSlots(MaltyChestTileEntity tile) {
-		int slotIndex = 0;
-		for (int row = 0; row < 3; ++row) {
-			for (int col = 0; col < 9; ++col) {
-				int x = 8 + col * 18;
-				int y = 16 + row * 18 + offset;
-				addSlot(new SlotItemHandler(tile.inventory, slotIndex++, x, y));
-			}
-		}
-		offset += 64;
 	}
 }
