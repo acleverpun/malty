@@ -1,49 +1,50 @@
 package family.hadden.malty.container;
 
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
-import family.hadden.malty.Main;
-import mcjty.lib.McJtyLib;
-import mcjty.lib.api.container.CapabilityContainerProvider;
+import family.hadden.malty.tileEntity.MaltyChestTileEntity;
+import family.hadden.malty.util.WorldUtils;
 import mcjty.lib.container.ContainerFactory;
 import mcjty.lib.container.GenericContainer;
 import mcjty.lib.tileentity.GenericTileEntity;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class AggregatorContainer extends GenericContainer {
-	// public static ContainerType<Container> createContainerType(String registryName) {
-	// 	Main.log.debug("createContainerType " + registryName);
-	// 	ContainerType<Container> containerType = IForgeContainerType.create((windowId, inv, data) -> {
-	// 		BlockPos pos = data.readBlockPos();
-	// 		TileEntity te = McJtyLib.proxy.getClientWorld().getTileEntity(pos);
-	// 		if (te == null) {
-	// 			throw new IllegalStateException("Something went wrong getting the GUI");
-	// 		}
-	// 		return te.getCapability(CapabilityContainerProvider.CONTAINER_PROVIDER_CAPABILITY).map(h -> h.createMenu(windowId, inv, McJtyLib.proxy.getClientPlayer())).orElseThrow(RuntimeException::new);
-	// 	});
-	// 	containerType.setRegistryName(registryName);
-	// 	return containerType;
-	// }
+	public int offset = 0;
 
-	// public static <T extends Container> ContainerType<T> createContainerType() {
-	// 	Main.log.debug("createContainerType");
-	// 	ContainerType<Container> containerType = IForgeContainerType.create((windowId, inv, data) -> {
-	// 		BlockPos pos = data.readBlockPos();
-	// 		TileEntity te = McJtyLib.proxy.getClientWorld().getTileEntity(pos);
-	// 		if (te == null) {
-	// 			throw new IllegalStateException("Something went wrong getting the GUI");
-	// 		}
-	// 		return te.getCapability(CapabilityContainerProvider.CONTAINER_PROVIDER_CAPABILITY).map(h -> h.createMenu(windowId, inv, McJtyLib.proxy.getClientPlayer())).orElseThrow(RuntimeException::new);
-	// 	});
-	// 	return (ContainerType<T>) containerType;
-	// }
+	public AggregatorContainer(@Nullable ContainerType<?> type, int id, ContainerFactory factory, BlockPos pos, @Nullable GenericTileEntity tile) {
+		super(type, id, factory, pos, tile);
 
-	public AggregatorContainer(@Nullable ContainerType<?> type, int id, ContainerFactory factory, BlockPos pos, @Nullable GenericTileEntity te) {
-		super(type, id, factory, pos, te);
-		Main.log.debug("aggregator container");
+		World world = tile.getWorld();
+		Map<Direction, TileEntity> tiles = WorldUtils.getAdjacentTiles(world, pos);
+		Capability<IItemHandler> cap = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+
+		tiles.entrySet().stream()
+			.filter((it) -> it.getValue().getCapability(cap, it.getKey().getOpposite()) != null)
+			.filter((it) -> it.getValue() instanceof MaltyChestTileEntity)
+			.forEach((it) -> addSlots((MaltyChestTileEntity) it.getValue()));
+		;
+	}
+
+	private void addSlots(MaltyChestTileEntity tile) {
+		int slotIndex = 0;
+		for (int row = 0; row < 3; ++row) {
+			for (int col = 0; col < 9; ++col) {
+				int x = 8 + col * 18;
+				int y = 16 + row * 18 + offset;
+				addSlot(new SlotItemHandler(tile.inventory, slotIndex++, x, y));
+			}
+		}
+		offset += 64;
 	}
 }
